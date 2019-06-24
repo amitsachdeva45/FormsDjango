@@ -17,10 +17,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from project import views
-from forms.views import forms
+from forms.views import forms, normalForm, modelForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
-    url(r'^form/$', forms, name='forms')
+    url(r'^form/$', forms, name='forms'),
+    url(r'^normalForm/$', normalForm, name='normalForm'),
+    url(r'^modelForm/$', modelForm, name='modelForm'),
 ]
