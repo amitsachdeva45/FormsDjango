@@ -29,8 +29,15 @@
   <body>
     <div class='container'>
         <form method="POST" action="">{% csrf_token %}
-            {{forms.as_p}}
-            <input type="submit" value="SUBMIT">
+          {{forms.non_field_errors}}
+          <p>{{forms.user}}</p>
+          <p><label for="{{ forms.title.id_for_label }}">{{forms.title.label}}: </label>{{forms.title}}</p>
+          {%if forms.title.errors%}
+            <div style="color:red">{{forms.title.errors.as_text}}</div>
+          {%endif%}
+          <p>{{forms.slug}}</p>
+          <p>{{forms.image}}</p>
+          <input type="submit" value="SUBMIT">
         </form>
     </div>
 

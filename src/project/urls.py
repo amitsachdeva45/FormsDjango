@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from project import views
-from forms.views import forms, normalForm, modelForm
+from forms.views import forms, normalForm, modelForm, testFormSet, modelFormSet, modelFormSetQuerySet
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +25,7 @@ urlpatterns = [
     url(r'^form/$', forms, name='forms'),
     url(r'^normalForm/$', normalForm, name='normalForm'),
     url(r'^modelForm/$', modelForm, name='modelForm'),
+    url(r'testFormSet/$', testFormSet, name='testFormSet'),
+    url(r'modelFormSet/$', modelFormSet, name='modelFormSet'),
+    url(r'modelFormSetQuerySet/$', modelFormSetQuerySet, name='modelFormSetQuerySet'),
 ]

@@ -5,8 +5,44 @@ from .models import Post
 class PostModelForm(forms.ModelForm):
     class Meta: #It means that data which is not field
         model = Post
-        fields = ["user", "title", "image"]
+        fields = ["user", "title","slug", "image"]
         exclude = []
+        labels = {
+            "title": "This is title label",
+            "slug": "This is slug"
+        }
+        help_text = {
+            "title": "This is helping title",
+            "slug": "This is helping slug"
+        }
+        error_messages ={
+            "slug": {
+                "required": "This slug is required",
+                "max_length": "This slug is too long",
+                "unique": "This slug must be unique"
+
+            },
+            "title":{
+                "required": "The title field is required"
+            }
+        }
+
+    def __init__(self,*args,**kwargs):
+        super(PostModelForm,self).__init__(*args,**kwargs)
+        # self.fields['title'].error_messages = {
+        #     "max_length": "This title is too long",
+        #     "required": "The title field is required"
+        # }
+
+    def clean_title(self,*args,**kwargs):
+        title = self.cleaned_data.get("title")
+        return title
+
+    def save(self, commit=True, *args, **kwargs):
+        obj = super(PostModelForm,self).save(commit=False,*args,**kwargs)
+        obj.publish = "2016-01-01" #It is not automatically save
+        obj.save()
+        return obj
 
 
 
@@ -51,3 +87,4 @@ class TextData(forms.Form):
         if integer < 10:
             raise forms.ValidationError("Integer greater than 10")
         return integer
+
